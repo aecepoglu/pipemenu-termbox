@@ -75,7 +75,7 @@ You could build an actual to-do application like this:
     --------------
     item 1
     the button for the internet,0,iexplorer.exe http://msn.com
-    tasks,1,"cat todo.txt | nl -s ' ' | sed -r 's/[ ]*([0-9]*) (.*)/\2,0,sed -i "\1d" todo.txt,1/'"
+    tasks,1,"cat ~/todo.txt | nl -s ' ' | sed -r 's/[ ]*([0-9]*) (.*)/\2,0,sed -i "\1d" ~\/todo.txt,1/'"
 
     todo.txt
     ------------------
@@ -83,3 +83,19 @@ You could build an actual to-do application like this:
     Buy a parrot. Teach the parrot to say "Help! I've been turned into a parrot.!"
     Hire two detectives. Have them follow each other.
     Change name to Simon. Speak in 3rd person.
+
+The command part of the _tasks_ item will print the text that can be parsed by the pipe menu.
+
+    Make a to-do list,0,sed -i "1d" ~/todo.txt,1
+    Buy a parrot. Teach the parrot to say "Help! I've been turned into a parrot.!",0,sed -i "2d" ~/todo.txt,1
+    Hire two detectives. Have them follow each other.,0,sed -i "3d" ~/todo.txt,1
+    Change name to Simon. Speak in 3rd person.,0,sed -i "4d" ~/todo.txt,1
+
+Notes
+-------------
+
+You can contact my by this website, or by e-mail. My e-mail address writes on top of every source file.  
+
+* The program is written in C, using the termbox library.  
+* It is licensed under GPL v3
+* It reads CSV data, so if you are using any commands within a field, make sure to surround that field with double quotation marks.

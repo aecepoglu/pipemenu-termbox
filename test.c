@@ -1,4 +1,7 @@
 /*
+author: aec
+email: aecepoglu at fastmail dot fm
+--
 This file is part of pipemenu-termbox.
 
 pipemenu-termbox is free software: you can redistribute it and/or modify
