@@ -102,4 +102,4 @@ You can contact my by this website, or by e-mail. My e-mail address writes on to
 
 * The program is written in C, using the termbox and libcsv libraries.
 * It is licensed under GPL v3
-* It reads CSV data, so if you are using any commands within a field, make sure to surround that field with double quotation marks.
+* It reads CSV data, so if you are using any commas within a field, make sure to surround that field with double quotation marks.
