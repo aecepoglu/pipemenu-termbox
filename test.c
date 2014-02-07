@@ -1,4 +1,19 @@
-#include <termbox.h>
+/*
+This file is part of pipemenu-termbox.
+
+pipemenu-termbox is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+pipemenu-termbox is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with pipemenu-termbox.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include <stdlib.h>
 #include <inttypes.h> //just to print PRIu16 and whatnot
 
@@ -8,7 +23,6 @@
 
 struct menu *mymenu;
 bool isRunning;
-int width;
 
 #define MAX(x,y) ((x) > (y) ? (x) : (y))
 #define MIN(x,y) ((x) < (y) ? (x) : (y))
@@ -48,12 +62,6 @@ void setItemTitle( struct item *myitem, char *buf, int count) {
 		myitem->textLen ++;
 	}
 }
-/*
-void setItemTitle( struct item *i, char *buf, int count) {
-	i->text = strndup(buf, count);
-	i->textLen = count;
-}
-*/
 
 void scroll(int dy) {
 	mymenu->windowStart += dy;
@@ -76,6 +84,14 @@ void quit(void) {
 	isRunning = false;
 }
 
+void refreshMenu(void) {
+	struct menu *prev = mymenu->prev;
+	int sel = mymenu->selection;
+	free( mymenu);
+	mymenu = executeCommand( prev->items[prev->selection]->cmd, prev->items[prev->selection]->isMenu );
+	mymenu->selection = sel < mymenu->count ? sel : (mymenu->count - 1);
+}
+
 void enter(void) {
 	struct item *i = mymenu->items[mymenu->selection];
 	if( i->cmd ) {
@@ -85,6 +101,9 @@ void enter(void) {
 			new->prev = mymenu;
 			new->windowEnd = mymenu->windowEnd - mymenu->windowStart;
 			mymenu = new;
+		}
+		else {
+			refreshMenu();
 		}
 	}
 }
@@ -96,9 +115,7 @@ void leave(void) {
 		mymenu = prev;
 
 		if(mymenu->needsRefresh) {
-			prev = mymenu->prev;
-			free( mymenu);
-			mymenu = executeCommand( prev->items[prev->selection]->cmd, prev->items[prev->selection]->isMenu );
+			refreshMenu();
 		}
 	}
 }
@@ -110,7 +127,6 @@ int main( int argc, char *args[]) {
 
 	tb_init();
 	mymenu->windowEnd = tb_height();
-	width = tb_width();
 	struct tb_event event;
 
 	int i,j,keyI;
@@ -141,7 +157,6 @@ int main( int argc, char *args[]) {
 				if( tmp->selection >= tmp->windowEnd)
 					scroll(tmp->selection - tmp->windowEnd);
 			}
-			width = tb_width;
 		}
 
 	}
