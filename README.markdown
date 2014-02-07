@@ -1,5 +1,5 @@
 README
-------------------
+=====================
 
 **pipe-menu** is a concept not unfamiliar to openbox users. You can read menus from files or from the output of other programs.  
 
@@ -38,6 +38,9 @@ You can use the the arrow keys to navitage the menu:
 * **right**: launches item command, and shows sub-menu if selected item is a sub-menu.
 
 When you select *item 2*, then the program will run *"firefox bitbucket.org/aecepoglu/pipemenu-termbox"*.  
+
+Menu Format
+--------------------
 You can see that *menu1.txt* has **CSV** format. The menu-format is:
 
 	<item title>,<isMenu>,<command>,<wantsRefresh>
@@ -92,11 +95,11 @@ The command part of the _tasks_ item will print the text that can be parsed by t
     Hire two detectives. Have them follow each other.,0,sed -i "3d" ~/todo.txt,1
     Change name to Simon. Speak in 3rd person.,0,sed -i "4d" ~/todo.txt,1
 
-Notes
+Contact/Notes/Dependencies
 -------------
 
 You can contact my by this website, or by e-mail. My e-mail address writes on top of every source file.  
 
-* The program is written in C, using the termbox library.  
+* The program is written in C, using the termbox and libcsv libraries.
 * It is licensed under GPL v3
 * It reads CSV data, so if you are using any commands within a field, make sure to surround that field with double quotation marks.
