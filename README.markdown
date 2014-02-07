@@ -32,6 +32,7 @@ And you'll launch the program to show this menu like so:
     pipemenu-termbox < menu1.txt
 
 You can use the the arrow keys to navitage the menu:
+
 * **up**,**down**: selects the item above or below
 * **left**: goes to previous menu
 * **right**: launches item command, and shows sub-menu if selected item is a sub-menu.
