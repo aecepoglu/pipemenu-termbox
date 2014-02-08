@@ -3,5 +3,5 @@ out:
 	gcc -o ${EXE} main.c streamReader.c -ltermbox -lcsv
 clean:	
 	rm ${EXE}
-install: rssproc
+install:
 	install ${EXE} "${DESTDIR}/rssproc" 
