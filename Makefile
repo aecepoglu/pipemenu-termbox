@@ -4,4 +4,4 @@ out:
 clean:	
 	rm ${EXE}
 install:
-	install ${EXE} "${DESTDIR}/rssproc" 
+	install ${EXE} "${DESTDIR}/" 
