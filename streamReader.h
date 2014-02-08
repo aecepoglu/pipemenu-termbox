@@ -17,6 +17,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with pipemenu-termbox.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+#ifndef STREAMREADER_H
+#define STREAMREADER_H
+
 #include <stdio.h>
 #include <termbox.h>
 #include "item.h"
@@ -37,3 +41,4 @@ struct menu *executeCommand( char *cmd, bool isMenu);
 
 void initReader();
 void endReader();
+#endif

@@ -17,11 +17,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with pipemenu-termbox.  If not, see <http://www.gnu.org/licenses/>.
 */
-void moveUp();
-void moveDown();
+
 void quit();
 void enter();
 void leave();
+void moveUp();
+void moveDown();
 
 struct key {
 	uint16_t key;

@@ -30,16 +30,6 @@ bool isRunning;
 #define MAX(x,y) ((x) > (y) ? (x) : (y))
 #define MIN(x,y) ((x) < (y) ? (x) : (y))
 
-void print_tb(const char *str, int x, int y, uint16_t fg, uint16_t bg)
-{
-	while (*str) {
-		uint32_t uni;
-		str += tb_utf8_char_to_unicode(&uni, str);
-		tb_change_cell(x, y, uni, fg, bg);
-		x++;
-	}
-}
-
 void freeItem( struct item *i) {
 	free(i->text);
 	if(i->cmd)
@@ -71,28 +61,47 @@ void scroll(int dy) {
 	mymenu->windowEnd += dy;
 }
 
-void moveUp(void) {
-	mymenu->selection = MAX(mymenu->selection - 1, 0);
-	if( mymenu->selection < mymenu->windowStart)
-		scroll(-1);
-}
-
-void moveDown(void) {
-	mymenu->selection = MIN(mymenu->selection + 1, mymenu->count - 1);
-	if( mymenu->selection >= mymenu->windowEnd)
-		scroll(+1);
-}
-
-void quit(void) {
-	isRunning = false;
-}
-
 void refreshMenu(void) {
 	struct menu *prev = mymenu->prev;
 	int sel = mymenu->selection;
 	free( mymenu);
 	mymenu = executeCommand( prev->items[prev->selection]->cmd, prev->items[prev->selection]->isMenu );
 	mymenu->selection = sel < mymenu->count ? sel : (mymenu->count - 1);
+}
+
+
+void move( int x) {
+    int target = mymenu->selection + x;
+	//printf("\t\t%d for [%d,%d)\n", target, mymenu->windowStart, mymenu->windowEnd);
+    if( target >= mymenu->windowEnd) {
+        scroll( MIN( mymenu->count - mymenu->windowEnd , x));
+        mymenu->selection = target;
+    }
+    else if( target < mymenu->windowStart) {
+        scroll( MAX( -mymenu->windowStart, x)); // same as -MIN( mymenu->windowStart, -x) //remember x is <0
+        mymenu->selection = target;
+    }
+    else {
+        //printItem( mymenu->items[mymenu->selection], mymenu->selection - mymenu->windowStart, false);
+        //printItem( mymenu->items[target], target - mymenu->windowStart, true);
+        mymenu->selection = target;
+    }
+}
+
+void quit(void) {
+	isRunning = false;
+}
+
+void moveUp() {
+	move( mymenu->selection == 0
+		? mymenu->count - 1
+		: -1);
+}
+
+void moveDown() {
+	move( mymenu->selection == mymenu->count -1 
+		? -mymenu->selection
+		: +1);
 }
 
 void enter(void) {

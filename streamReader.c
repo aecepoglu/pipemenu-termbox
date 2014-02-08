@@ -113,51 +113,6 @@ struct menu* readStream( FILE *fp) {
 	return result;
 }
 
-/*
-struct menu* readStream(FILE *fp) {
-	struct menu *result = (struct menu*)malloc(sizeof(struct menu));
-
-	result->size = MENUSIZE;
-	result->items = (struct item**)calloc( MENUSIZE, sizeof(struct item*));
-
-	regex_t *compiled = malloc(sizeof(regex_t));
-	regcomp( compiled, "(.*),(0|1),(.*)\n", REG_EXTENDED);
-	int subCount = 1+compiled->re_nsub;
-
-	result->count =0;
-	result->windowStart = 0;
-	char buf[BUFSIZ];
-	while( fgets( buf, BUFSIZ, fp) ) {
-		DEBUG("\tbuf: <<%s>>\n", buf);
-		regmatch_t matches[subCount];
-
-		struct item *anItem = (struct item*)malloc(sizeof(struct item));
-		if( result->count == result->size) {
-			result->size *= 2;
-			result->items = (struct item**)realloc(result->items, result->size * sizeof(struct item*));
-		}
-
-		if( regexec( compiled, buf, subCount, matches, 0) ) {
-			setItemTitle( anItem, buf, strlen(buf)-1);
-			anItem->cmd = 0;
-			anItem->isMenu = 0;
-		}
-		else {
-			setItemTitle( anItem, buf+matches[1].rm_so, matches[1].rm_eo - matches[1].rm_so);
-			anItem->cmd  = strndup( buf+matches[3].rm_so, matches[3].rm_eo - matches[3].rm_so);
-			anItem->isMenu = buf[matches[2].rm_so] != '0';
-		}
-
-		result->items[result->count] = anItem;
-		result->count ++;
-		DEBUG("read %d items\n", result->count);
-	}
-
-	result->prev = 0;
-	result->selection = 0;
-}
-*/
-
 struct menu* executeCommand( char *cmd, bool isMenu) { //TODO error checking of stuff in here
 	fprintf(LOGFP,"%s\n", cmd);
 	struct menu *result = 0;
