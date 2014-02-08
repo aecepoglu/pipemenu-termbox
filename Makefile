@@ -1,3 +1,7 @@
+EXE=pmenu-tb
 out:
-	gcc -o test test.c streamReader.c -ltermbox -lcsv
-
+	gcc -o ${EXE} main.c streamReader.c -ltermbox -lcsv
+clean:	
+	rm ${EXE}
+install: rssproc
+	install ${EXE} "${DESTDIR}/rssproc" 
