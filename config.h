@@ -24,12 +24,29 @@ void leave();
 void moveUp();
 void moveDown();
 
+/*=====================
+	KEYBINDINGS
+
+Keybindings are used to trigger the functions above.
+*/
 struct key {
 	uint16_t key;
 	uint32_t ch;
 	void(*action)(void);
 };
 
+
+
+/*
+'NUMKEYS' should match the number of keybinding entries.
+
+Keybindings for simple ascii keys are have 'key' value '0'.
+Their 'ch' value should be the ascii value
+
+Special keys(arrow keys, for example) have a 'key' value 
+as defined in 'termbox.h' file, and their 'ch' value is '0'.
+*/
+#define NUMKEYS 9
 struct key keys[] = {
 	{0, 'q', &quit},
 	{0, 'n', &moveUp},
@@ -41,4 +58,15 @@ struct key keys[] = {
 	{TB_KEY_ARROW_LEFT, 0, &leave},
 	{TB_KEY_ARROW_RIGHT, 0, &enter},
 };
-#define NUMKEYS 5
+
+
+/*=====================
+	COLORS
+
+Normal-output-mode of termbox is used (TB_OUTPUT_NORMAL).
+This means 8 basic color options defined in 'termbox.h' can be used.
+(9, including TB_DEFAULT)
+*/
+#define COLOR_FG_NORMAL TB_WHITE
+#define COLOR_FG_SELECTED TB_BLUE
+#define COLOR_BG TB_DEFAULT

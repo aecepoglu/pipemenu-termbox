@@ -36,6 +36,7 @@ You can use the the arrow keys to navitage the menu:
 * **up**,**down**: selects the item above or below
 * **left**: goes to previous menu
 * **right**: launches item command, and shows sub-menu if selected item is a sub-menu.
+* **q**: terminates the program
 
 When you select *item 2*, then the program will run *"firefox bitbucket.org/aecepoglu/pipemenu-termbox"*.  
 
@@ -73,7 +74,7 @@ So, you can have submenus like so:
     Change name to Simon. Speak in 3rd person.
 
 And when you launch the pipe-menu and have it display _menu2.txt_,then select and enter the 3rd item _tasks_, the menu will start showing contents of _todo.txt_.  
-You could build an actual to-do application like this:
+You could for example build an actual to-do application like this:
 
     menu3.txt
     --------------
@@ -94,6 +95,14 @@ The command part of the _tasks_ item will print the text that can be parsed by t
     Buy a parrot. Teach the parrot to say "Help! I've been turned into a parrot.!",0,sed -i "2d" ~/todo.txt,1
     Hire two detectives. Have them follow each other.,0,sed -i "3d" ~/todo.txt,1
     Change name to Simon. Speak in 3rd person.,0,sed -i "4d" ~/todo.txt,1
+
+Configuration
+-------------
+
+You can change the keybindings and colors by editing the source code _config.h_.  
+The default _config.h_ has bindings for ascii characters *'q'*,*'h'*, *'t'*, *'c'*, *'s'* *(which are Vim movement keys in Dvorak layout*), as well as the arrow keys.  
+You can also set the colors using the *normal output mode* of *termbox* (So you can use the basic 8 colors as defined in _termbox.h_).  
+
 
 Contact/Notes/Dependencies
 -------------
