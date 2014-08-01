@@ -40,7 +40,7 @@ void freeItem( struct item *i) {
 void printItem( struct item *item, int y, bool isSelected) {
 	int i;
 	for( i=0; i<item->textLen; i++) {
-		tb_change_cell(i, y, item->text[i], isSelected ? TB_BLUE : TB_WHITE, TB_DEFAULT);
+		tb_change_cell(i, y, item->text[i], isSelected ? COLOR_FG_SELECTED : COLOR_FG_NORMAL, COLOR_BG);
 	}
 }
 
