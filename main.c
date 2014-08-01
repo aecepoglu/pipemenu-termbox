@@ -114,7 +114,7 @@ void enter(void) {
 			new->windowEnd = mymenu->windowEnd - mymenu->windowStart;
 			mymenu = new;
 		}
-		else {
+		else if(mymenu->needsRefresh) {
 			refreshMenu();
 		}
 	}

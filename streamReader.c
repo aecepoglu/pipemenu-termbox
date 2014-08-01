@@ -21,6 +21,7 @@ along with pipemenu-termbox.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdio.h>
 #include <regex.h>
 #include <string.h>
+#include <sys/wait.h>
 
 #include "csv.h"
 

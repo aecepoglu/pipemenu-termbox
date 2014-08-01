@@ -22,6 +22,8 @@ along with pipemenu-termbox.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef ITEM_H
 #define ITEM_H
 
+#include <stdbool.h>
+
 struct item {
 	uint32_t *text;
 	//char *text;
